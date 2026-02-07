@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose")
 const User = require("../models/users")
 const { createError, handleEndSession, handleSuccessSession } = require("../utils/databaseHelpers")
 const { BuildingRequest, PreBoughtBuilding } = require("../models/Buildings")
-const { CityRoles } = require("../models/cities")
+const { CityRoles } = require("../models/Cities")
 
 const approveBuildingRequest = async (req, res) => {
     const session = await mongoose.startSession()
