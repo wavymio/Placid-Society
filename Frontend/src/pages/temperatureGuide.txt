@@ -1,0 +1,31 @@
+So here’s a useful guide for assigning unique temperatures:
+You can divide them into ranges based on climate vibes:
+
+🟢 Cool to Mild (Ideal for plants, temperate cities)
+Great for lush, green cities, forests, balanced climates
+Range: 15°C – 20°C
+Examples:
+
+City A: 16°C
+
+City B: 18°C
+
+City C: 19.5°C
+
+🟠 Warm (Still good for growth, edging toward hot)
+Think Mediterranean or savanna-type cities
+Range: 21°C – 27°C
+Examples:
+
+City D: 23°C
+
+City E: 25.8°C
+
+🔴 Hot (Tropical, desert, or heat-resistant flora)
+These cities would have plants adapted to heat
+Range: 28°C – 35°C
+Examples:
+
+City F: 30°C
+
+City G: 34°C

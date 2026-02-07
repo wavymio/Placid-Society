@@ -1,0 +1,654 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=PT+Sans&family=Raleway:wght@100;200;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@100;200;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: red;
+} */
+
+/* Loading Spinner animation */
+.loader {
+  border: 4px solid transparent;
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.big-loader {
+  border: 4px solid #fff;
+  /* border-top: 4px solid #ffffff; */
+  border-radius: 10%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bigger-loader {
+  border: 8px solid #fff;
+  /* border-top: 4px solid #ffffff; */
+  border-radius: 20%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.animate-spin {
+  animation: spin 3s linear infinite;
+}
+
+.animate-slide {
+  display: inline-block;
+  animation: slide 8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Toast Notification Animation */
+.animate-fade-in-out {
+  animation: fade-in-out 5s ease-in-out;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Themes Gradient Colours */
+.instagram-gradient {
+  background: linear-gradient(45deg, 
+    #405DE6 0%,
+    #5B51D8 10%,
+    #833AB4 20%,
+    #C13584 30%,
+    #E1306C 40%,
+    #FD1D1D 50%,
+    #F56040 60%,
+    #FCAF45 80%,
+    #FFDC80 90%,
+    #5B51D8 100%);
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+	width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #27272a;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #fff;
+  cursor: pointer;
+}
+
+/* Hide Scrollbar */
+.scrollable {
+  overflow: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+.scrollable::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome, Safari */
+}
+
+/* Blur Effect */
+.backdrop-blur-custom {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* transparent bg */
+.black-opacity {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.white-opacity {
+  background: rgba(255, 255, 255, 0.3);
+  font-family: 'Orbitron', 'Barlow', sans-serif;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.black-opacity-card {
+  background: rgba(0, 0, 0, 0.4);
+  font-family: 'Orbitron', 'Barlow', sans-serif;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+.logo {
+  font-family: 'Orbitron', 'Barlow', sans-serif;
+}
+
+.blacker-opacity {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Video Seekbar */
+.video-seekbar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    outline: none;
+
+    border-radius: 30px;
+}
+
+.video-seekbar:hover {
+
+  cursor: pointer;
+}
+
+.video-seekbar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  background: white;
+  cursor: pointer;
+  border-radius: 0px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.video-seekbar.thumb-visible::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.video-seekbar.thumb-hidden::-webkit-slider-thumb {
+  opacity: 0;
+}
+
+.video-seekbar::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: white;
+  cursor: pointer;
+  border-radius: 0px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.video-seekbar.thumb-visible::-moz-range-thumb {
+  opacity: 1;
+}
+
+.video-seekbar.thumb-hidden::-moz-range-thumb {
+  opacity: 0;
+}
+
+/* Playing animation */
+.visualizer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bar {
+  width: 6px;
+  background-color: #fff;
+  transition: height 0.3s ease; /* Smooth height transition */
+  border-radius: 50px;
+}
+
+/* Room Events Animation */
+@keyframes scrollUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes scrollLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(15px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}
+
+/* transalate x ltr */
+/* transalate y ttb */
+
+@keyframes fly-around-land {
+  0% {
+    transform: translate(0%, 0%) skewX(30deg) rotateY(0deg); /* top-left */
+  }
+  20% {
+    transform: translate(100%, 0%) skewX(30deg) rotateY(180deg); /* top-right */
+  }
+  40% {
+    transform: translate(100%, 100%) skewX(30deg) rotateY(180deg); /* bottom-right */
+  }
+  60% {
+    transform: translate(0%, 100%) skewX(30deg) rotateY(0deg); /* bottom-left */
+  }
+  80% {
+    transform: translate(0%, 0%) skewX(30deg) rotateY(0deg); /* top-left */
+  }
+  100% {
+    transform: translate(0%, 0%) skewX(30deg) rotateY(0deg); /* back to start */
+  }
+}
+
+@keyframes perch {
+  0% {
+    transform: translateY(0px) skewX(30deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(10px) skewX(30deg) rotateY(180deg);
+  }
+  50% {
+    transform: translateY(0px) skewX(30deg) rotateY(0deg);
+  }
+  75% {
+    transform: translateY(10px) skewX(30deg) rotateY(180deg);
+  }
+  100% {
+    transform: translateY(0px) skewX(30deg) rotateY(0deg);
+  }
+}
+
+@keyframes fly-natural {
+  0% {
+    transform: translateX(0px) skewX(30deg) rotateY(0deg) translateY(0px); /* face left */
+  }
+  10% {
+    transform: translateX(30px) skewX(30deg) rotateY(180deg) translateY(-20px); /* flip right */
+  }
+  20% {
+    transform: translateX(60px) skewX(30deg) rotateY(180deg) translateY(-30px); /* fly right */
+  }
+  30% {
+    transform: translateX(90px) skewX(30deg) rotateY(180deg) translateY(-15px);
+  }
+  40% {
+    transform: translateX(120px) skewX(30deg) rotateY(180deg) translateY(0px);
+  }
+  50% {
+    transform: translateX(90px) skewX(30deg) rotateY(0deg) translateY(20px); /* flip left */
+  }
+  60% {
+    transform: translateX(60px) skewX(30deg) rotateY(0deg) translateY(10px);
+  }
+  70% {
+    transform: translateX(30px) skewX(30deg) rotateY(0deg) translateY(-10px);
+  }
+  80% {
+    transform: translateX(0px) skewX(30deg) rotateY(0deg) translateY(-20px);
+  }
+  90% {
+    transform: translateX(0px) skewX(30deg) rotateY(0deg) translateY(-10px);
+  }
+  100% {
+    transform: translateX(0px) skewX(30deg) rotateY(0deg) translateY(0px); /* back to start */
+  }
+}
+
+@keyframes chickenPeck {
+  0%, 100% {
+    transform: rotateX(0deg) translateY(0);
+  }
+  30% {
+    transform: rotateX(30deg) translateY(3px);
+  }
+  60% {
+    transform: rotateX(10deg) translateY(1px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scaleY(1) translateY(0);
+  }
+  50% {
+    transform: scaleY(1.03) translateY(-1px); /* Slight expand + lift */
+  }
+}
+
+@keyframes rotateBird {
+  from {
+    transform: translateX(100px);
+  }
+  to {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes revolveBird {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rectangularFlight {
+  0% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(0deg);
+  }
+
+  20% {
+    transform: translate(-800px, 0px) skewX(30deg) rotate(0deg);         /* Straight left */
+  }
+
+  25% {
+    transform: translate(-800px, 0px) skewX(30deg) rotate(55deg);      /* Turn starts */
+  }
+
+  45% {
+    transform: translate(-800px, -500px) skewX(30deg) rotate(55deg);     /* Straight up */
+  }
+
+  50% {
+    transform: translate(-800px, -500px) skewX(30deg) rotate(125deg);     /* Turn starts */
+  }
+
+  70% {
+    transform: translate(0px, -500px) skewX(30deg) rotate(125deg);       /* Straight right */
+  }
+
+  75% {
+    transform: translate(0px, -500px) skewX(30deg) rotate(225deg);       /* Turn starts */
+  }
+
+  95% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(225deg);         /* Straight up */
+  }
+
+  100% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(360deg);         /* Turn to original */
+  }
+}
+
+@keyframes triangularFlight {
+  0% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(0deg); /* Facing left */
+  }
+
+  28% {
+    transform: translate(-600px, 0px) skewX(30deg) rotate(0deg); /* Move straight left */
+  }
+
+  33% {
+    transform: translate(-600px, 0px) skewX(30deg) rotate(90deg); /* Begin turning downward */
+  }
+
+  61% {
+    transform: translate(-300px, -500px) skewX(30deg) rotate(90deg); /* Move down-right */
+  }
+
+  66% {
+    transform: translate(-300px, -500px) skewX(30deg) rotate(200deg); /* Begin turning up-right */
+  }
+
+  95% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(200deg); /* Move up-right to start point */
+  }
+
+  100% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(360deg); /* Complete loop to original rotation */
+  }
+}
+
+@keyframes snakeFlight {
+  0% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(55deg); /* Start facing up */
+  }
+
+  5% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(55deg); /* Stay + skewX(30deg) rotate up */
+  }
+
+  15% {
+    transform: translate(0px, -500px) skewX(30deg) rotate(55deg); /* Move up */
+  }
+
+  18% {
+    transform: translate(0px, -500px) skewX(30deg) rotate(125deg); /* Turn right */
+  }
+
+  28% {
+    transform: translate(600px, -500px) skewX(30deg) rotate(125deg); /* Move right */
+  }
+
+  31% {
+    transform: translate(600px, -500px) skewX(30deg) rotate(225deg); /* Turn down */
+  }
+
+  41% {
+    transform: translate(600px, 0px) skewX(30deg) rotate(225deg); /* Move down */
+  }
+
+  44% {
+    transform: translate(600px, 0px) skewX(30deg) rotate(125deg); /* Turn right */
+  }
+
+  54% {
+    transform: translate(1200px, 0px) skewX(30deg) rotate(125deg); /* Move right */
+  }
+
+  57% {
+    transform: translate(1200px, 0px) skewX(30deg) rotate(55deg); /* Turn up */
+  }
+
+  67% {
+    transform: translate(1200px, -500px) skewX(30deg) rotate(55deg); /* Move up */
+  }
+
+  70% {
+    transform: translate(1200px, -500px) skewX(30deg) rotate(0deg); /* Turn left */
+  }
+
+  80% {
+    transform: translate(600px, -500px) skewX(30deg) rotate(0deg); /* Move left */
+  }
+
+  83% {
+    transform: translate(600px, -500px) skewX(30deg) rotate(-115deg); /* Turn down */
+  }
+
+  89% {
+    transform: translate(600px, 0px) skewX(30deg) rotate(-115deg); /* Move down */
+  }
+
+  94% {
+    transform: translate(600px, 0px) skewX(30deg) rotate(0deg); /* Turn left */
+  }
+
+  99% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(0deg); /* Final move left back to start */
+  }
+
+  100% {
+    transform: translate(0px, 0px) skewX(30deg) rotate(55deg); /* FACE UP */
+  }
+}
+
+.isometric-plot {
+  width: 1680px;
+  height: 1500px;
+  background-color: #ccc; /* or use your terrain texture */
+  transform: skewX(-30deg);
+  transform-origin: top left;
+}
+
+.room-event-animation-large {
+  animation: scrollUp 0.6s ease-in-out; /* Apply animation */
+}
+
+.room-event-animation {
+  animation: scrollLeft 0.6s ease-in-out; /* Apply animation */
+}
+
+/* City Room  Rendering */
+.room {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Hide scrollbar */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Roulette Menu */
+.roulette-action {
+  position: absolute;
+  transform-origin: left center;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, scale 0.3s ease-in-out;
+}
+
+.center {
+  scale: 1.2;
+  opacity: 1;
+  z-index: 3;
+}
+
+.side {
+  scale: 0.8;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+@keyframes wave {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(5px, -5px); }
+  50%  { transform: translate(-5px, 5px); }
+  75%  { transform: translate(5px, 5px); }
+  100% { transform: translate(0, 0); }
+}
+
+.energy-blur {
+  animation: wave 5s ease-in-out infinite;
+}
