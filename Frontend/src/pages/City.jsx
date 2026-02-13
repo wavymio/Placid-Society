@@ -31,14 +31,14 @@ const City = () => {
     const { createPlot, isCreatePlotLoading } = useCreatePlot()
     const { getPlots, isGetPlotsLoading } = useGetPlots()
     const { sendAction, isSendActionLoading } = useHandleActions()
-    const isMobile = useIsMobile()
+    const { isMobile, isSmallScreen } = useIsMobile()
     const navigate = useNavigate()
     const containerRef = useRef(null)
     const transformRef = useRef(null)
     const [dimensions, setDimensions] = useState(null)
     const [myCity, setMyCity] = useState({})
     const [scale, setScale] = useState(1)
-    const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(18)
+    const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(8)
     // const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(myCity?.tzOff ?? 0)
     const filteredPlotsRef = useRef([])
     const [myCoords, setMyCoords] = useState(null)
@@ -221,6 +221,7 @@ const City = () => {
                 }
                 if (isVisible) fetchFilteredPlots.push(plot.id)
             }
+
         } else {
             const oldViewPlots = viewFilteredPlotsRef.current
             for (const plot of oldViewPlots) {
@@ -505,38 +506,6 @@ const City = () => {
         myCoords, updatedFilteredPlots, finalPlots, inspect, ridingEntityRef }
     }, [myCoords, inspect, usersInViewSnapshot, finalPlots, updatedFilteredPlots])
 
-    // const handleOtherUserJoin = (data) => {
-    //     // console.log("A user joined: ", data)
-    //     if (usersInView.current.has(data._id)) return
-    //     usersInView.current.set(data._id, data)
-    // }
-
-    // const handleOtherUserMove = (data) => {
-    //     // console.log("A user moved: ", data)
-    //     const { modifiedStats, ...payload } = data
-    //     const theUser = usersInView.current.get(payload._id)
-    //     if (theUser) {
-    //         const theUserStats = theUser.userStyleId.stats
-    //         const newUserCoords = { ...theUser, ...payload, userStyleId: { ...theUser.userStyleId, stats: { ...theUserStats, ...modifiedStats } } }
-    //         return usersInView.current.set(payload._id, newUserCoords)
-    //     }
-    // }
-
-    // const handlePlotCreated = (data) => {
-    //     // console.log("Someone initialised a plot: ", data)
-    //     // console.log("Current plots I can see: ", updatedFilteredPlots.fetchFilteredPlots)
-    //     const currentView = updatedFilteredPlots.fetchFilteredPlots
-    //     layerCacheRef.current.set(data.id, { layers: data.layers })
-    //     finalPlots[data.id - 1].modified = true
-    //     if (currentView.includes(data.id)) {
-    //         setFilteredPlots(prev => {
-    //             return prev.map((plot) => {
-    //                 return plot.id === data.id ? { ...plot, modified: true, ...(layerCacheRef.current.get(plot.id)) } : plot
-    //             })
-    //         })
-    //     }
-    // }
-
     useEffect(() => {
         if (socket && myUserCoords) {
             const handleEntityCollected = (data) => {
@@ -645,15 +614,15 @@ const City = () => {
         [ myCoords, layerIdx, userActions, inspect, plots, myCity ]
     )
 
+    const allNeeded = useMemo(() => {
+        return (!!myCity && !!cityRng && !!socket && !!groupEntityMap && !!myUserCoords)
+    }, [myCity, cityRng, socket, groupEntityMap, myUserCoords])
+
     // Earth Brown	#7B3F00	Rich loamy soil
     // Clay Brown	#B87333	Orange-brown clay
     // Dark Soil	#3E2C1C	Deep, moist earth
     // Sandy Dirt	#C2B280	Pale, dry soil
     // Ashen Grey	#6E6E6E	Volcanic or spent soil
-
-    const allNeeded = useMemo(() => {
-        return (!!myCity && !!cityRng && !!socket && !!groupEntityMap && !!myUserCoords)
-    }, [myCity, cityRng, socket, groupEntityMap, myUserCoords])
 
     return (
         <div style={{background: layerIdx === 0 ? '#739860' : '#3E2C1C'}}

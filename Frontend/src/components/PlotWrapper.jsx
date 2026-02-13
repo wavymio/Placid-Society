@@ -148,10 +148,10 @@ const PlotWrapper = ({ plot, timeFilter, viewport, scale, filteredPlots, layerId
                         setMyCoords={setMyCoords} usersInView={usersInView} groupEntityMap={groupEntityMap}
                         riderIsMe={entity.mainRider && (entity.mainRider._id === myCoords?._id) ? true : false} />
                     )}
-                    {entity.grp === "airAnimal" && (
+                    {/* {entity.grp === "airAnimal" && (
                         <AirAnimalEntity key={entity._id || eKey} isNight={isNight} entity={entity} animalTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
                         closest={closest} setSelectedEntity={setSelectedEntity} plotId={plot.id} />
-                    )}
+                    )} */}
                     {(["object", "food", "leaf", "fruit", "element"].includes(entity.grp)) && (
                         <ObjectEntity key={entity._id || eKey} entity={entity} objectTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
                         closest={closest} setSelectedEntity={setSelectedEntity}/>

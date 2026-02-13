@@ -35,7 +35,7 @@ const { connectToRedis } = require('./db/redisClient')
 
 // Middleware Setup
 app.use(express.static(path.join(__dirname, '../../Frontend/dist')))
-const allowedOrigins = [process.env.FRONTEND_URL]
+const allowedOrigins = [process.env.FRONTEND_URL, process.env.DOMAIN_NAME]
 app.use(cors({
     origin: function (origin, callback) {
         if (allowedOrigins.includes(origin) || !origin) {

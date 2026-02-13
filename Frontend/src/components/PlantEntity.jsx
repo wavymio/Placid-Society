@@ -28,11 +28,9 @@ const PlantEntity = React.memo(({ entity, plantTypes, timeFilter, closest=false,
                 zIndex: actualY + 1 + plant?.states[entity.s].size[0],
                 height,
                 width,
-                // pointerEvents: "auto",
                 filter: `brightness(${1 - timeFilter})`,
                 pointerEvents: 'none',
                 // background: closest ? countryColour3 : '',
-                transform: closest ? 'scaleX(1.05)' : '',
                 transformOrigin: "bottom left"
                 // transform: 'skewX(30deg)'
             }}>
@@ -49,7 +47,7 @@ const PlantEntity = React.memo(({ entity, plantTypes, timeFilter, closest=false,
                     style={{
                         // pointerEvents: "auto",
                         transform: 'skewX(30deg)',
-                        filter: closest ? 'sepia(1) saturate(3) hue-rotate(-10deg)' : '',
+                        filter: closest ? 'hue-rotate(-15deg)' : '',
                     }}
                 />
             </div>

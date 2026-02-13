@@ -153,9 +153,10 @@ export function isWithinBuffer(plot, viewport, buffer) {
 }
 
 export function isPlotVisible(plot, viewport, plotWidth = PLOT_WIDTH, plotHeight = PLOT_HEIGHT) {
+    // if (plot.id === 779) console.log({ viewport, plotX: plot.x, plotY: plot.y, plotHeight, plotWidth })
     return (
-        plot.x + plotWidth >= viewport.x &&
-        plot.x <= viewport.x + viewport.width &&
+        (plot.x - plot.skewOffset) + (plotWidth + plot.skewOffset) >= viewport.x &&
+        (plot.x - plot.skewOffset) <= viewport.x + viewport.width &&
         plot.y + plotHeight >= viewport.y &&
         plot.y <= viewport.y + viewport.height
     )

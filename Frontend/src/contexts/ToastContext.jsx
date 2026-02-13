@@ -1,36 +1,32 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Toast from '../components/Toast'
 
 const ToastContext = createContext()
 
 export const ToastProvider = ({ children }) => {
-  const [toasts, setToasts] = useState([])
+  const [toasts, setToasts] = useState(null)
 
   const addToast = (type, message) => {
-    const id = Date.now()
-    setToasts(prevToasts => [...prevToasts, { id, type, message }])
+    setToasts(prevToasts => prevToasts?.message === message ? prevToasts : { type, message })
     setTimeout(() => {
-        removeToast(id)
+        removeToast()
     }, 5000)
   }
 
-  const removeToast = (id) => {
-    setToasts(toasts.filter(toast => toast.id !== id))
+  const removeToast = () => {
+    setToasts(null)
   }
 
   return (
     <ToastContext.Provider value={{addToast}}>
       {children}
-      <div className="sm:w-auto p-0 w-full fixed z-50 top-0 right-0 sm:top-5 sm:right-5 flex flex-col gap-3">
-        {toasts.map(toast => (
+        {toasts && (
           <Toast
-            key={toast.id}
-            type={toast.type}
-            message={toast.message}
-            onClose={() => removeToast(toast.id)}
+            type={toasts.type}
+            message={toasts.message}
+            onClose={() => removeToast()}
           />
-        ))}
-      </div>
+        )}
     </ToastContext.Provider>
   )
 }

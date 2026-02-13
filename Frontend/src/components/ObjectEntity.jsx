@@ -30,13 +30,9 @@ const ObjectEntity = ({ closest=false, entity, objectTypes, timeFilter, setSelec
             zIndex: entity.t === "hole" ? 1 : actualY + 1 + height,
             height,
             width,
-            // pointerEvents: "auto",
             filter: `brightness(${1 - timeFilter})`,
             pointerEvents: 'none',
             // background: closest ? countryColour3 : '',
-            // transform: closest ? `scaleX(1.15) scaleY(1.15)` : ``
-            transform: ``
-            // transform: 'skewX(30deg)'
         }}>
             {closest && (
                 <EnergyBar max={100} quantity={entity.energy} hideNumbers={true}
@@ -50,7 +46,6 @@ const ObjectEntity = ({ closest=false, entity, objectTypes, timeFilter, setSelec
                 alt={object?.name}
                 className={`w-full h-full object-contain transition-transform duration-500 ease-in-out`}
                 style={{
-                    // pointerEvents: "auto",
                     transform: 'skewX(30deg)',
                     filter: closest ? 'sepia(1) saturate(3) hue-rotate(-10deg)' : '',
                 }}

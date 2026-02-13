@@ -14,7 +14,6 @@ function getCurrentAction(timetable, hour) {
 }
 
 const restActions = ["sleep", "rest", "catch-breath"]
-const rideActions = ["ride-rest", "ride-walk", "ride-run"]
 
 const getNewState = (currentMs, stateList, createdAt, transform) => {
     let regenState
@@ -194,6 +193,8 @@ self.onmessage = (e) => {
             ceKey = isUser ? closestEntity._id : `${closestEntity.t}-${closestEntity.p[0]}-${closestEntity.p[1]}`
         } else ceKey = myCoords.on
     }
+
+    // console.log(plot.id, visibleEntities.map(e => e.grp === "plant").length)
 
     self.postMessage({ visibleEntities, ceKey, newEntities, ridingEntity })
 }
