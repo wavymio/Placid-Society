@@ -99,8 +99,8 @@ const MobileNav = ({ isLoggedIn, user, logout, isLoading, isAuthLoading }) => {
                         <>
                             <Link onClick={handleLinkClick} to={'/user-profile'} className='px-4 pt-4 pb-4 cursor-pointer hover:bg-neutral-800 rounded-t-lg transition-colors duration-300 ease-in-out'><span className='flex items-center gap-2'>Profile <BsPersonArmsUp /></span></Link>
                             <Separator className="bg-neutral-800" />
-                            <Link onClick={handleLinkClick} to={'/my-videos'} className='px-4 pt-4 pb-4 cursor-pointer hover:bg-neutral-800 transition-colors duration-300 ease-in-out'><span className='flex items-center gap-2'>Videos <FaVideo /></span></Link>
-                            <Separator className="bg-neutral-800" />
+                            {/* <Link onClick={handleLinkClick} to={'/my-videos'} className='px-4 pt-4 pb-4 cursor-pointer hover:bg-neutral-800 transition-colors duration-300 ease-in-out'><span className='flex items-center gap-2'>Videos <FaVideo /></span></Link>
+                            <Separator className="bg-neutral-800" /> */}
                             <Link onClick={handleLinkClick} to={'/buildings'} className='px-4 pt-4 pb-4 cursor-pointer hover:bg-neutral-800 transition-colors duration-300 ease-in-out'><span className='flex items-center gap-2'>Buildings <BsBuildingsFill /></span></Link>
                             <Separator className="bg-neutral-800" />
                             <Link onClick={handleLogout} className='px-4 pt-4 pb-4 cursor-pointer hover:bg-neutral-800 rounded-b-lg transition-colors duration-300 ease-in-out'>{isLoading ? (<span className='loader'></span>) : (<span className='flex items-center gap-2'>Logout <IoLogOut /></span>)}</Link>
