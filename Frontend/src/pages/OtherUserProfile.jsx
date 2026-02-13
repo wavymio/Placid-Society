@@ -53,7 +53,7 @@ const OtherUserProfile = () => {
     return (
         <div className='w-full flex flex-col justify-center gap-9 sm:gap-14'>
             <UserProfileBio user={user} sameUser={sameUser} loggedInUser={loggedInUser} />
-            <UserProfileRooms user={user} sameUser={sameUser} loggedInUser={loggedInUser} setLocationId={setLocationId} setOpenLogin={setOpenLogin} />
+            {/* <UserProfileRooms user={user} sameUser={sameUser} loggedInUser={loggedInUser} setLocationId={setLocationId} setOpenLogin={setOpenLogin} />
 
             {openLogin && (
                 <div className='flex items-center justify-center z-20 fixed top-0 left-0 bg-transparent w-full h-full backdrop-filter backdrop-blur-lg shadow-lg rounded-lg'>
@@ -71,7 +71,7 @@ const OtherUserProfile = () => {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
