@@ -10,7 +10,7 @@ const UserLegs = ({ myCoords, timeFilter, show="both", gender }) => {
             height: gender ==="male" ? "38.5%" : "50%",
             width: "100%",
             opacity: myCoords.on === "water" ? 0.05 : 100,
-            filter: `brightness(${1 - timeFilter})`,
+            // filter: `brightness(${1 - timeFilter})`,
             zIndex: 10
         }}>
             

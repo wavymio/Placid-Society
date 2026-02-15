@@ -28,13 +28,14 @@ const PlantEntity = React.memo(({ entity, plantTypes, timeFilter, closest=false,
                 zIndex: actualY + 1 + plant?.states[entity.s].size[0],
                 height,
                 width,
-                filter: `brightness(${1 - timeFilter})`,
+                // filter: `brightness(${1 - timeFilter})`,
                 pointerEvents: 'none',
                 // background: closest ? countryColour3 : '',
                 transformOrigin: "bottom left",
                 contain: "layout paint",
                 transform: "translateZ(0)",
                 willChange: "transform",
+                
             }}>
                 {closest && (
                     <EnergyBar max={100} quantity={entity.energy} hideNumbers={true}

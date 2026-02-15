@@ -12,7 +12,7 @@ const UserHead = ({ timeFilter, myCoords, gender }) => {
                 width: "10px",
             }),
             zIndex: 100,
-            filter: `brightness(${1 - timeFilter})`,
+            // filter: `brightness(${1 - timeFilter})`,
         }}>
             {/* HEAD */}
             <div className='rounded-full'

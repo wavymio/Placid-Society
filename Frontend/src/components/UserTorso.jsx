@@ -15,7 +15,7 @@ const UserTorso = ({ myCoords, isFullySubmerged, timeFilter, action, heldItem, h
             height: gender === "male" ? "38.5%" : "30%",
             opacity: (myCoords.on !== "water" || !isFullySubmerged) ? 100 :  0.05,
             width: "100%",
-            filter: `brightness(${1 - timeFilter})`,
+            // filter: `brightness(${1 - timeFilter})`,
             zIndex: 20,
         }}>
             {/* TORSO */}

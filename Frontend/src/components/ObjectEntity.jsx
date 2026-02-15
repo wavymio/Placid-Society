@@ -30,7 +30,7 @@ const ObjectEntity = ({ closest=false, entity, objectTypes, timeFilter, setSelec
             zIndex: entity.t === "hole" ? 1 : actualY + 1 + height,
             height,
             width,
-            filter: `brightness(${1 - timeFilter})`,
+            // filter: `brightness(${1 - timeFilter})`,
             pointerEvents: 'none',
             contain: "layout paint",
             transform: "translateZ(0)",
@@ -50,7 +50,7 @@ const ObjectEntity = ({ closest=false, entity, objectTypes, timeFilter, setSelec
                 className={`w-full h-full object-contain transition-transform duration-500 ease-in-out`}
                 style={{
                     transform: 'skewX(30deg)',
-                    filter: closest ? 'sepia(1) saturate(3) hue-rotate(-10deg)' : '',
+                    filter: closest ? 'hue-rotate(-15deg)' : '',
                 }}
             />
         </div>

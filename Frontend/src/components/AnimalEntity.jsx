@@ -94,7 +94,7 @@ const AnimalEntity = React.memo(({ entity, animalTypes, timeFilter, closest=fals
                 width: `${width}px`,
                 height: `${height}px`,
                 animation: `${animal?.animation} ${delay}` || 'none',
-                filter: `brightness(${1 - timeFilter})` 
+                // filter: `brightness(${1 - timeFilter})` 
                 }}
             >
                 <img loading="eager"
@@ -102,7 +102,7 @@ const AnimalEntity = React.memo(({ entity, animalTypes, timeFilter, closest=fals
                 alt={animal?.name}
                 className="w-full h-full object-contain"
                 style={{ transform: `${facing === "r" ? 'skewX(30deg) rotateY(180deg)' : 'skewX(30deg)'}`, 
-                filter: (closest && !riderIsMe) ? 'sepia(1) saturate(3) hue-rotate(-10deg)' : '',  }}
+                filter: (closest && !riderIsMe) ? 'hue-rotate(-15deg)' : '',  }}
                 
                 />
             </div>

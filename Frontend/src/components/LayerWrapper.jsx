@@ -26,7 +26,7 @@ myBoundRef, myPlotId, timeFilter, plotId, isWaterPatch, moveUser, layerIdx, wall
                 willChange: 'transform',
                 zIndex,
                 pointerEvents: 'none',
-                background: bg1
+                background: bg1,
                 // background: 'rgb(134 239 172)'
                 
             }}>

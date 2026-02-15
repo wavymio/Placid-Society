@@ -58,7 +58,7 @@ const AirAnimalEntity = ({ isNight, entity, animalTypes, timeFilter, closest=fal
                     className="w-full h-full object-contain group-hover:scale-110"
                     style={{
                         // filter: `brightness(${1})`,
-                        filter: closest ? 'sepia(1) saturate(3) hue-rotate(-10deg)' : '',
+                        filter: closest ? 'hue-rotate(-15deg)' : '',
                     }}
                 />
             </div>
