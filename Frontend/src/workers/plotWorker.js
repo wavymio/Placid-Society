@@ -194,7 +194,7 @@ self.onmessage = (e) => {
         } else ceKey = myCoords.on
     }
 
-    // console.log(plot.id, visibleEntities.map(e => e.grp === "plant").length)
+    // console.log(plot.id, visibleEntities.filter(e => e.grp === "plant").length)
 
     self.postMessage({ visibleEntities, ceKey, newEntities, ridingEntity })
 }

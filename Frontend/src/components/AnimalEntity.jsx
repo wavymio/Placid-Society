@@ -46,7 +46,9 @@ const AnimalEntity = React.memo(({ entity, animalTypes, timeFilter, closest=fals
             left,
             zIndex: entity.p[1] - height + height,
             transformOrigin: '50% 100%',
-            transition: "left 1.01s linear, top 1.01s linear"
+            transition: "left 1.01s linear, top 1.01s linear",
+            transform: "translateZ(0)",
+            willChange: "top, left, transform",
         }}
         >
             {(closest && !riderIsMe) && (

@@ -159,7 +159,7 @@ const UserProfileBio = ({ user, sameUser, loggedInUser }) => {
                         {user?.friends.length === 1 ? `${user?.friends.length} Friend` : `${user?.friends.length} Friends`}
                     </div>
                     <div className='cursor-pointer border border-neutral-800 bg-neutral-900 flex justify-center px-3 py-3 w-auto xs:px-2 xs:py-3 xs:min-w-20 sm:px-2 sm:py-4 sm:min-w-28 rounded-lg font-semibold text-xs sm:text-sm hover:bg-neutral-800 transition-colors ease-in-out duration-300'>
-                        {user?.country ? user?.country : "Country"}
+                        {user?.country ? user?.country : "Passport"}
                     </div>
                 </div>
             </div>

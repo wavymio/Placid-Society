@@ -48,7 +48,7 @@ const LoginForm = ({ buttonText, bottomText, bottomLinkText, bottomLink, handleL
     const onSubmit = (e) => {
         e.preventDefault()
         if (!inputs.fingerprint) return
-        console.log(inputs)
+        // console.log(inputs)
 
         if (location === "/signup") {
             resetErrors()

@@ -62,7 +62,7 @@ export const useTimeFilter = (utcOffset = 0) => {
             setTimeHour(hour)
             setTimeFilter(opacity)
             setTimeNow(Date.now())
-            console.log("setting...")
+            // console.log("setting...")
         }, 60000) // Updates every 1 minute
 
         const secondInterval = setInterval(() => {

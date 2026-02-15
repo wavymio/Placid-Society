@@ -28,7 +28,6 @@ export const useGetMyUser = () => {
             return data
 
         } catch (err) {
-            console.log(err)
             if (err.message === "Failed to fetch") {
                 addToast("error", "Network Error")
             }
@@ -68,8 +67,7 @@ export const useGetMyUserCoords = () => {
             const data = await response.json()
             return data
         } catch (err) {
-            console.error(err)
-            // addToast("error", err.message === "Failed to fetch" ? "Poor Internet Connection" : err.message)
+            addToast("error", err.message === "Failed to fetch" ? "Poor Internet Connection" : err.message)
         }
     }
 
@@ -89,15 +87,13 @@ export const useGetMyUserActivity = (userId) => {
     
             if (!response.ok) {
                 const error = await response.json()
-                console.log(error)
                 throw new Error(error.error)
             }
 
             const data = await response.json()
             return data
         } catch (err) {
-            console.log(err)
-            // addToast("error", (err.message === "Failed to fetch" ? "Network Error" : err.message))
+            addToast("error", (err.message === "Failed to fetch" ? "Network Error" : err.message))
         }
     }
 
@@ -129,7 +125,6 @@ export const useLogoutMyUser = () => {
             addToast("success", data.success)
             return data
         } catch (err) {
-            console.log(err)
             addToast("error", (err.message === "Failed to fetch" ? "Network Error" : err.message))
         }
     }

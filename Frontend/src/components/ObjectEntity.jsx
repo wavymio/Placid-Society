@@ -32,6 +32,9 @@ const ObjectEntity = ({ closest=false, entity, objectTypes, timeFilter, setSelec
             width,
             filter: `brightness(${1 - timeFilter})`,
             pointerEvents: 'none',
+            contain: "layout paint",
+            transform: "translateZ(0)",
+            willChange: "transform",
             // background: closest ? countryColour3 : '',
         }}>
             {closest && (
