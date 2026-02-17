@@ -38,7 +38,7 @@ const City = () => {
     const [dimensions, setDimensions] = useState(null)
     const [myCity, setMyCity] = useState({})
     const [scale, setScale] = useState(1)
-    // const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(8)
+    // const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(10)
     const { timeFilter, timeNow, timeHour, timeSecond } = useTimeFilter(myCity?.tzOff ?? 0)
     const filteredPlotsRef = useRef([])
     const [myCoords, setMyCoords] = useState(null)
@@ -625,8 +625,7 @@ const City = () => {
     // Ashen Grey	#6E6E6E	Volcanic or spent soil
 
     return (
-        <div style={{background: layerIdx === 0 ? '#739860' : '#3E2C1C'}}
-        // <div style={{background: myCity.surroundingColor}}
+        <div 
         className={`w-[100%] h-[88vh] relative flex justify-center`} ref={containerRef}>
             {(!welcome) && (
                 <div className='absolute top-0 left-0 w-full h-full white-opacity z-[999999] flex items-center justify-center'>
@@ -665,6 +664,12 @@ const City = () => {
             sendAction={sendAction} isSendActionLoading={isSendActionLoading} cityId={myCity._id} layerCacheRef={layerCacheRef} 
             closeInspectFromOutside={closeInspect} setCloseInspectFromOutside={setCloseInspect} groupEntityMap={groupEntityMap}/>
             
+            <div className='w-[100%] h-[100%]' 
+            style={{background: layerIdx === 0 ? '#739860' : '#3E2C1C', 
+                filter: `brightness(${1 - timeFilter})`,
+                transition: 'filter 5s ease-in-out'
+            }}
+            >
             <TransformWrapper ref={transformRef} minScale={1} maxScale={1} initialScale={1} 
             onInit={(ref) => { transformInstanceRef.current = ref }}
             // onTransformed={(ref) => handleTransform(ref)}   
@@ -676,8 +681,7 @@ const City = () => {
                 <TransformComponent wrapperStyle={{
                     width: "100%",
                     height: "100%",
-                    // background: 'red'
-                    background: layerIdx === 0 ? `rgba(0, 0, 0, ${timeFilter})` : `rgba(0, 0, 0, ${(layerIdx/10) + 0.4})`
+                    background: layerIdx === 0 ? `rgba(0, 0, 0, 0.1)` : `rgba(0, 0, 0, ${(layerIdx/10) + 0.4})`,
                 }}
                 contentStyle={{ width: "100%", height: "100%" }}>
                     <>
@@ -696,6 +700,7 @@ const City = () => {
                     </>
                 </TransformComponent>
             </TransformWrapper>
+            </div>
         </div>
     )
 }

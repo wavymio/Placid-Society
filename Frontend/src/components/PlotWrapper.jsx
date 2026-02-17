@@ -38,7 +38,7 @@ const PlotWrapper = ({ plot, timeFilter, viewport, scale, filteredPlots, layerId
     
 
     const workerRef = useRef(null)
-    const visibleLayerData = useRef([])
+    const [visibleLayerData, setVisibleLayerData] = useState([])
 
     useEffect(() => {
         if (myCoords) {
@@ -92,7 +92,7 @@ const PlotWrapper = ({ plot, timeFilter, viewport, scale, filteredPlots, layerId
             const { visibleEntities, ceKey: ceKeyVal, newEntities, ridingEntity } = e.data
             layer.entities = newEntities
             ceKey.current = ceKeyVal
-            visibleLayerData.current = visibleEntities
+            setVisibleLayerData(visibleEntities)
             if (myCoords) {
                 const ridingActionChanged = (ridingEntity?.ins ?? null) !== (ridingEntityRef.current?.ins ?? null)
                 if (ridingActionChanged) setRidingAction(ridingEntity?.ins)
@@ -131,47 +131,42 @@ const PlotWrapper = ({ plot, timeFilter, viewport, scale, filteredPlots, layerId
         <>
         {/* GROUND ACTIVITY LAYER Z-200 */}
         <LayerWrapper height={plot.height} width={plot.width} x={plot.x} y={plot.y} zIndex={300} bg1='' bg2='' >
-            <div className='' 
-            style={{ 
-                filter: `brightness(${1 - timeFilter})`,
-             }}>
-                {visibleLayerData.current?.map((entity, eidx) => {
-                    const isUser = entity.userStyleId 
-                    const eKey = isUser ? entity._id : entity.id
-                    const compareKey = isUser ? entity._id : `${entity.t}-${entity.p[0]}-${entity.p[1]}`
-                    const closest = ceKey.current === compareKey
-                    return (
-                        <div key={entity._id || eKey}>
-                        {entity.grp === "plant" && ( 
-                            <PlantEntity key={`${entity._id}-${entity.s}` || eKey} entity={entity} plantTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter}
-                            closest={closest} setSelectedEntity={setSelectedEntity} />
-                        )}
-                        {entity.grp === "animal" && (
-                            <AnimalEntity key={entity._id || eKey} entity={entity} animalTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
-                            closest={closest} setSelectedEntity={setSelectedEntity}
-                            setMyCoords={setMyCoords} usersInView={usersInView} groupEntityMap={groupEntityMap}
-                            riderIsMe={entity.mainRider && (entity.mainRider._id === myCoords?._id) ? true : false} />
-                        )}
-                        {/* {entity.grp === "airAnimal" && (
-                            <AirAnimalEntity key={entity._id || eKey} isNight={isNight} entity={entity} animalTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
-                            closest={closest} setSelectedEntity={setSelectedEntity} plotId={plot.id} />
-                        )} */}
-                        {(["object", "food", "leaf", "fruit", "element"].includes(entity.grp)) && (
-                            <ObjectEntity key={entity._id || eKey} entity={entity} objectTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
-                            closest={closest} setSelectedEntity={setSelectedEntity}/>
-                        )}
-                        {(entity.userStyleId && !entity.riding) && (
-                            <UserStyle timeFilter={timeFilter} key={entity._id} myCoords={entity} userRef={null} myId={myCoords?._id ?? null}
-                            closest={closest} setSelectedEntity={setSelectedEntity} usersInView={usersInView} actionsMap={actionsMap}
-                            groupEntityMap={groupEntityMap} />
-                        )}
-                        </div>
-                    )
-                })}
-                {(myCoords && myCoords?.plotId === plot.id && !myCoords.riding && !myCoords.held) && (
-                    <UserStyle groupEntityMap={groupEntityMap} setMyCoords={setMyCoords} timeFilter={timeFilter} myCoords={myCoords} userRef={userRef} actionsMap={actionsMap}/>
-                )}
-            </div>
+            {visibleLayerData.map((entity, eidx) => {
+                const isUser = entity.userStyleId 
+                const eKey = isUser ? entity._id : entity.id
+                const compareKey = isUser ? entity._id : `${entity.t}-${entity.p[0]}-${entity.p[1]}`
+                const closest = ceKey.current === compareKey
+                return (
+                    <div key={entity._id || eKey}>
+                    {entity.grp === "plant" && ( 
+                        <PlantEntity key={`${entity._id}-${entity.s}` || eKey} entity={entity} plantTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter}
+                        closest={closest} setSelectedEntity={setSelectedEntity} />
+                    )}
+                    {entity.grp === "animal" && (
+                        <AnimalEntity key={entity._id || eKey} entity={entity} animalTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
+                        closest={closest} setSelectedEntity={setSelectedEntity}
+                        setMyCoords={setMyCoords} usersInView={usersInView} groupEntityMap={groupEntityMap}
+                        riderIsMe={entity.mainRider && (entity.mainRider._id === myCoords?._id) ? true : false} />
+                    )}
+                    {/* {entity.grp === "airAnimal" && (
+                        <AirAnimalEntity key={entity._id || eKey} isNight={isNight} entity={entity} animalTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
+                        closest={closest} setSelectedEntity={setSelectedEntity} plotId={plot.id} />
+                    )} */}
+                    {(["object", "food", "leaf", "fruit", "element"].includes(entity.grp)) && (
+                        <ObjectEntity key={entity._id || eKey} entity={entity} objectTypes={groupEntityMap[entity.grp]} timeFilter={timeFilter} 
+                        closest={closest} setSelectedEntity={setSelectedEntity}/>
+                    )}
+                    {(entity.userStyleId && !entity.riding) && (
+                        <UserStyle timeFilter={timeFilter} key={entity._id} myCoords={entity} userRef={null} myId={myCoords?._id ?? null}
+                        closest={closest} setSelectedEntity={setSelectedEntity} usersInView={usersInView} actionsMap={actionsMap}
+                        groupEntityMap={groupEntityMap} />
+                    )}
+                    </div>
+                )
+            })}
+            {(myCoords && myCoords?.plotId === plot.id && !myCoords.riding && !myCoords.held) && (
+                <UserStyle groupEntityMap={groupEntityMap} setMyCoords={setMyCoords} timeFilter={timeFilter} myCoords={myCoords} userRef={userRef} actionsMap={actionsMap}/>
+            )}
 
             {/* UNDERGROUND WALLS */}
             {/* {(layerIdx > 0) && (

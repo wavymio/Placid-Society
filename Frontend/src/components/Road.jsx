@@ -2,6 +2,7 @@ import React from 'react'
 
 const Road = ({ top='', left='', bottom='', right='', width='', height='', bgImg=null, bgColor, bgSize, axis, timeFilter, loc, 
     plotId, yOffset, xOffset, dataWidth, dataHeight, dataSkewOffset }) => {
+        // console.log("Road </> ...")
     return (
         <div className={`absolute`} 
         data-plot-id={plotId}
@@ -23,7 +24,7 @@ const Road = ({ top='', left='', bottom='', right='', width='', height='', bgImg
             ...(bgImg ? {backgroundRepeat: axis === 'x' ? 'repeat-x' : 'repeat-y',
             backgroundSize: bgSize,
             backgroundPosition: 'center'} : {}),
-            filter: `brightness(${1 - timeFilter})`,
+            // filter: `brightness(${1 - timeFilter})`,
         }}></div>
     )
 }
