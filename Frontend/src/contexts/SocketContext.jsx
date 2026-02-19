@@ -21,6 +21,7 @@ export const SocketProvider = ({ children }) => {
             setIsSocketLoading(true)
 
             socket.current = io(SOCKET_BASE_URL, {
+                path: '/socket',
                 withCredentials: true,
                 transports: ['websocket', 'polling']
                 // query: { userId: loggedInUser._id } // not safe
