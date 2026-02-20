@@ -1,4 +1,4 @@
-export const handleEndSession = async (session) => {
+const handleEndSession = async (session) => {
     if (!session) return
     try {
         await session.abortTransaction() // abort first
@@ -13,7 +13,7 @@ export const handleEndSession = async (session) => {
     }
 }
 
-export const handleSuccessSession = async (session) => {
+const handleSuccessSession = async (session) => {
     if (!session) return
     try {
         console.log('COMMITTING TX', { sessionId: session?.clientSession?.id || session?.id || 'no-session', time: Date.now() })
@@ -27,8 +27,10 @@ export const handleSuccessSession = async (session) => {
     }
 }
 
-export const createError = (message, statusCode = 400) => {
+const createError = (message, statusCode = 400) => {
     const error = new Error(message)
     error.statusCode = statusCode
     return error
 }
+
+module.exports = { handleEndSession, handleSuccessSession, createError }

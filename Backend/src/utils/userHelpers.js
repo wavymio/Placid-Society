@@ -1,4 +1,4 @@
-export function rangeFromNegativeToPositive(num) {
+function rangeFromNegativeToPositive(num) {
   const result = []
   for (let i = -num; i <= num; i++) {
     result.push(i);
@@ -6,9 +6,9 @@ export function rangeFromNegativeToPositive(num) {
   return result
 }
 
-export const pickRandom = arr => arr[Math.floor(Math.random() * arr.length)]
+const pickRandom = arr => arr[Math.floor(Math.random() * arr.length)]
 
-export const mins = {
+const mins = {
     male: {
         musc: 0,
         width: 15
@@ -20,7 +20,7 @@ export const mins = {
     }
 }
 
-export const maxs = {
+const maxs = {
     male: {
         musc: 30,
         width: 40
@@ -32,7 +32,7 @@ export const maxs = {
     }
 }
 
-export const statMaxs = {
+const statMaxs = {
     health: 100,
     energy: 100,        
     endurance: "__INF__",
@@ -44,7 +44,7 @@ export const statMaxs = {
     lgn: "__INF__",
 }
 
-export const statMins = {
+const statMins = {
     health: 0,
     energy: 0,        
     endurance: 0,
@@ -55,3 +55,5 @@ export const statMins = {
     immunity: 0,
     lgn: 0,
 }
+
+module.exports = { rangeFromNegativeToPositive, pickRandom, mins, maxs, statMins, statMaxs }
