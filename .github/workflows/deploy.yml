@@ -1,0 +1,85 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Create frontend .env
+      - name: Create frontend .env
+        run: |
+          echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" > Frontend/.env
+          echo "VITE_SOCKET_BASE_URL=${{ secrets.VITE_SOCKET_BASE_URL }}" >> Frontend/.env
+
+      # Install & Build Frontend
+      - name: Install frontend dependencies
+        run: npm --prefix Frontend install
+
+      - name: Build frontend
+        run: npm --prefix Frontend run build
+
+      # Setup SSH
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key
+          chmod 600 ~/.ssh/ec2_key
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      # Create backend .env
+      - name: Create backend .env
+        run: |
+          echo "MONGODB_CONNECTION_STRING=${{ secrets.MONGODB_CONNECTION_STRING }}" > Backend/.env
+          echo "REDIS_CONNECTION_STRING=${{ secrets.REDIS_CONNECTION_STRING }}" >> Backend/.env
+          echo "DOMAIN_NAME=${{ secrets.DOMAIN_NAME }}" >> Backend/.env
+          echo "FRONTEND_URL=${{ secrets.FRONTEND_URL }}" >> Backend/.env
+          echo "BCRYPT_SALT_ROUNDS=${{ secrets.BCRYPT_SALT_ROUNDS }}" >> Backend/.env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> Backend/.env
+          echo "CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}" >> Backend/.env
+          echo "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" >> Backend/.env
+          echo "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" >> Backend/.env
+          echo "EMAIL=${{ secrets.EMAIL }}" >> Backend/.env
+          echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> Backend/.env
+
+      # Create folders on EC2 (if they don’t exist)
+      - name: Create directories on EC2
+        run: |
+          ssh -i ~/.ssh/ec2_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+          "mkdir -p /home/ubuntu/Frontend /home/ubuntu/Backend"
+
+      # Deploy files
+      - name: Deploy to EC2
+        run: |
+          # Copy the contents of Frontend/dist to the destination in the ec2 instance - /home/ubuntu/Frontend/dist/
+          rsync -avz -e "ssh -i ~/.ssh/ec2_key" \
+            Frontend/dist/ \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/Frontend/dist/
+
+          # Copy backend
+          rsync -avz -e "ssh -i ~/.ssh/ec2_key" \
+            --exclude='node_modules' \
+            Backend/ \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/Backend/
+
+      # Install backend deps & restart with PM2
+      - name: Install dependencies and restart server
+        run: |
+          ssh -i ~/.ssh/ec2_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/Backend
+            npm install --production
+            pm2 restart app || pm2 start index.js --name app
+            pm2 save
+          EOF
