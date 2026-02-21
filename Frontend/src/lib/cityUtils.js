@@ -1,3 +1,5 @@
+import { v4 } from "uuid"
+
 export function syncViewportToTransform(maxTries = 10, delay = 0, transform, viewportRef, setCanShowPlots, targetX, targetY) {
     let tries = 0
     const sync = () => {
@@ -709,7 +711,7 @@ export const generateLayersForPlot = (plot, myCity, cityConfig, cityRng) => {
 
                 if (!pos) return null
 
-                const base = { id: crypto.randomUUID(), t: name, p: pos, s: "grown", grp: resource, createdAt: 1740787200000, ...rest }
+                const base = { id: v4(), t: name, p: pos, s: "grown", grp: resource, createdAt: 1740787200000, ...rest }
 
                 if (resource === "animal" || resource === "airAnimal") {
                     return {
@@ -727,7 +729,7 @@ export const generateLayersForPlot = (plot, myCity, cityConfig, cityRng) => {
 
             thisLayer.entities.push(...layerItems)
         })
-        const woodenAxe = { id: crypto.randomUUID(), t: "wooden axe", p: [300, 1550], s: "new", grp: "object", energy: 100, dna: null }
+        const woodenAxe = { id: v4(), t: "wooden axe", p: [300, 1550], s: "new", grp: "object", energy: 100, dna: null }
         const entitesRequired = isWater ? cityConfig.waterEarthlies : layerNo > 0 ? { land: cityConfig.landEarthlies.land} : cityConfig.landEarthlies
         thisLayer.entities.push(woodenAxe)
         thisLayer.earthlies = entitesRequired
