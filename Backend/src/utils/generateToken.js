@@ -9,8 +9,10 @@ const generateTokenAndSetCookie = async (userId, username, userCoordsId, res) =>
     res.cookie("jwt", token, {
         maxAge: 15 * 24 * 60 * 1000,
         httpOnly: true,
-        sameSite: 'None',
-        secure: true
+        // sameSite: 'None',
+        // secure: true
+        sameSite: 'lax',
+        secure: false,
     })
 
     console.log('Cookie set successfully')
