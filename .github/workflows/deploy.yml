@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }} ${{ github.head_ref || github.ref }}   # unique identifier for this workflow/group
+  cancel-in-progress: true  # cancels the previous workflow
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,18 +22,27 @@ jobs:
         with:
           node-version: '20'
 
+      # Cache frontend dependencies
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        id: cache
+        with: 
+          path: Frontend/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      # Install & Build Frontend
+      - name: Install frontend dependencies
+        run: npm --prefix Frontend install
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Build frontend
+        run: npm --prefix Frontend run build
+
       # Create frontend .env
       - name: Create frontend .env
         run: |
           echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" > Frontend/.env
           echo "VITE_SOCKET_BASE_URL=${{ secrets.VITE_SOCKET_BASE_URL }}" >> Frontend/.env
-
-      # Install & Build Frontend
-      - name: Install frontend dependencies
-        run: npm --prefix Frontend install
-
-      - name: Build frontend
-        run: npm --prefix Frontend run build
 
       # Setup SSH
       - name: Setup SSH key
